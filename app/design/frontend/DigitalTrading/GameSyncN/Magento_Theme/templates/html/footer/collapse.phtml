@@ -1,0 +1,115 @@
+<?php
+/**
+ * Hyvä Themes - https://hyva.io
+ * Copyright © Hyvä Themes 2020-present. All rights reserved.
+ */
+
+declare(strict_types=1);
+
+use Hyva\Theme\Model\ViewModelRegistry;
+use Hyva\Theme\ViewModel\HeroiconsOutline;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+
+/** @var Template $block */
+/** @var Escaper $escaper */
+/** @var ViewModelRegistry $viewModels */
+
+/** @var HeroiconsOutline $heroicons */
+$heroicons = $viewModels->require(HeroiconsOutline::class);
+
+$title = (string) $block->getData('title');
+$open = (bool) $block->getData('open');
+?>
+<?php if ($title !== '-'): ?>
+<div
+    x-data="footerCollapse()"
+    x-bind="eventListeners"
+    data-open="<?= $open ? 'true' : 'false' ?>"
+    class="footer-collapse-block"
+>
+    <div
+        x-bind="setToggleRoles"
+        @click="toggle()"
+        @keydown.enter="toggle()"
+        @keydown.space.prevent="toggle()"
+        data-id="footer-<?= $escaper->escapeHtmlAttr($block->getNameInLayout()) ?>"
+        class="flex justify-between items-center py-3 cursor-pointer lg:cursor-default border-b border-zinc-300 lg:border-0"
+    >
+        <h3 class="text-base font-semibold text-slate-700">
+            <?= $escaper->escapeHtml(__($title)) ?>
+        </h3>
+        <span class="lg:hidden">
+            <?= $heroicons->chevronDownHtml('w-5 h-5 transition-transform', 25, 25, [':class' => "{ 'rotate-180': open }"]) ?>
+        </span>
+    </div>
+    <div
+        x-show="isOpen()"
+        x-collapse
+        x-bind="setCollapseRoles"
+        id="footer-<?= $escaper->escapeHtmlAttr($block->getNameInLayout()) ?>"
+        class="footer-links-container pb-4 lg:pb-0 text-sm text-slate-600"
+    >
+        <?= $block->getChildHtml() ?>
+    </div>
+</div>
+<?php else: ?>
+<div class="footer-column-non-collapsible text-sm text-slate-600">
+    <?= $block->getChildHtml() ?>
+</div>
+<?php endif; ?>
+
+<script>
+    function footerCollapse() {
+        return {
+            open: false,
+            isMobile: false,
+            init() {
+                this.checkIsMobileResolution();
+                if (this.$root.dataset.open === "true") {
+                    this.open = true;
+                }
+            },
+            checkIsMobileResolution() {
+                const chevron = this.$el.querySelector('.lg\\:hidden');
+                this.isMobile = chevron ? getComputedStyle(chevron).display !== 'none' : false;
+            },
+            isOpen() {
+                return this.isMobile ? this.open : true;
+            },
+            toggle() {
+                return this.isMobile ? this.open = !this.open : true;
+            },
+            eventListeners: {
+                ['@resize.window.debounce']() {
+                    this.checkIsMobileResolution();
+                },
+                ['@visibilitychange.window.debounce']() {
+                    this.checkIsMobileResolution();
+                }
+            },
+            setToggleRoles: {
+                [':role']() {
+                    return this.isMobile && 'button';
+                },
+                [':tabindex']() {
+                    return this.isMobile && '0';
+                },
+                [':aria-expanded']() {
+                    return this.isMobile ? this.open : null;
+                },
+                [':aria-controls']() {
+                    return this.isMobile ? this.$el.dataset.id : null;
+                }
+            },
+            setCollapseRoles: {
+                [':aria-hidden']() {
+                    return this.isMobile ? !this.open : null;
+                },
+                [':aria-labelledby']() {
+                    return this.isMobile ? this.$el.id : null;
+                }
+            }
+        }
+    }
+</script>

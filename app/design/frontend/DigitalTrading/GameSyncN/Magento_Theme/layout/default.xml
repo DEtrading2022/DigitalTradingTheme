@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<page
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
+>
+    <body>
+	<!-- productdes accordion -->
+	<referenceBlock name="script-alpine-js">
+            <block name="alpine-plugin-collapse" template="Magento_Theme::page/js/plugins/collapse.phtml"/>
+			<block name="alpine-plugin-ajax-cart" template="Magento_Theme::page/js/plugins/ajax-cart.phtml">
+                <arguments>
+                    <argument name="delay" xsi:type="number">500</argument> <!-- Extra delay in milliseconds added to the loader (true/false) -->
+                    <argument name="show_sku" xsi:type="boolean">true</argument> <!-- Show Sku (true/false) -->
+                    <argument name="display_on_success" xsi:type="string">modal</argument> <!-- What to show on success (false/minicart/modal) -->
+                </arguments>
+            </block>
+
+        </referenceBlock>
+   <!-- Cart drawers hyva ui-->
+		<referenceBlock name="cart-drawer">
+            <arguments>
+                <argument name="show_sku" xsi:type="boolean">true</argument> <!-- Show sku in product options (true/false) -->
+                <argument name="qty_style" xsi:type="string">input</argument> <!-- Qty style (text/input/select/incrementor) -->
+            </arguments>
+        </referenceBlock>
+        <block name="cart-drawer.qtybox" template="Magento_Theme::html/cart/qtybox.phtml"/>
+
+	<!-- Header CMS -->
+		 <referenceBlock name="after.body.start">
+            <block name="header-notification" template="Magento_Theme::html/header/notification.phtml" after="global_notices"/>
+        </referenceBlock>
+
+        <referenceBlock name="header-content">
+            <arguments>
+                <argument name="show_compare" xsi:type="boolean">true</argument>
+                <argument name="show_wishlist" xsi:type="boolean">true</argument>
+                <argument name="show_language" xsi:type="boolean">true</argument>
+            </arguments>
+
+            <block
+                name="topmenu_mobile_wrapper"
+                as="mobilemenu"
+                template="Magento_Theme::html/header/mobilemenu.phtml"
+                ttl="3600"
+            >
+                <arguments>
+                    <argument name="cache_lifetime" xsi:type="string">3600</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+
+        <move element="topmenu_mobile" destination="topmenu_mobile_wrapper"/>
+
+        <referenceBlock name="top.container">
+            <block name="header-usps" template="Magento_Theme::html/header/usps.phtml" before="-"/>
+        </referenceBlock>
+   
+	<!-- Breadcrumbs A hyva UI -->
+	<referenceBlock name="breadcrumbs">
+            <arguments>
+                <argument name="show_back_btn" xsi:type="boolean">true</argument> <!-- Show back button on mobile (true/false) -->
+                <argument name="overflow_style" xsi:type="string">normal</argument> <!-- Overflow style (normal/sticky) -->
+            </arguments>
+     </referenceBlock>
+
+	<!-- Footer CMS -->
+        <referenceContainer name="footer-content-before">
+            <block name="footer-cta" template="Magento_Theme::html/footer/cta.phtml"/>
+        </referenceContainer>
+        <referenceContainer name="footer-content-after">
+            <block name="footer-usps" template="Magento_Theme::html/footer/usps.phtml" before="-"/>
+        </referenceContainer>
+		<move element="footer-static-links" destination="footer_column_5"/>
+		
+		
+        <referenceBlock name="footer-content">
+            <container name="footer-content-before"/>
+			
+			<!-- Footer Column 0 - Non-collapsible -->
+			<block class="Magento\Cms\Block\Block" name="footer_column_0">
+                <arguments>
+                    <argument name="block_id" xsi:type="string">footer_column_0</argument>
+                </arguments>
+            </block>
+            
+			<!-- Footer Column 1 - Collapsible -->
+			<block name="footer_column_1" template="Magento_Theme::html/footer/collapse.phtml">
+                <arguments>
+                    <argument name="title" xsi:type="string" translate="true">Column 1</argument>
+                    <argument name="open" xsi:type="boolean">false</argument>
+                </arguments>
+				<block class="Magento\Cms\Block\Block" name="footer-cms-content-1">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">footer_column_1</argument>
+                    </arguments>
+                </block>
+            </block>
+            
+            <!-- Footer Column 2 - Collapsible -->
+            <block name="footer_column_2" template="Magento_Theme::html/footer/collapse.phtml">
+                <arguments>
+                    <argument name="title" xsi:type="string" translate="true">Column 2</argument>
+                    <argument name="open" xsi:type="boolean">false</argument>
+                </arguments>
+                <block class="Magento\Cms\Block\Block" name="footer-cms-content-2">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">footer_column_2</argument>
+                    </arguments>
+                </block>
+            </block>
+            
+            <!-- Footer Column 3 - Collapsible -->
+            <block name="footer_column_3" template="Magento_Theme::html/footer/collapse.phtml">
+                <arguments>
+                    <argument name="title" xsi:type="string" translate="true">Column 3</argument>
+                    <argument name="open" xsi:type="boolean">false</argument>
+                </arguments>
+                <block class="Magento\Cms\Block\Block" name="footer-cms-content-3">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">footer_column_3</argument>
+                    </arguments>
+                </block>
+            </block>
+            
+            <!-- Footer Column 4 - Collapsible -->
+            <block name="footer_column_4" template="Magento_Theme::html/footer/collapse.phtml">
+                <arguments>
+                    <argument name="title" xsi:type="string" translate="true">Column 4</argument>
+                    <argument name="open" xsi:type="boolean">false</argument>
+                </arguments>
+                <block class="Magento\Cms\Block\Block" name="footer-cms-content-4">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">footer_column_4</argument>
+                    </arguments>
+                </block>
+            </block>
+			
+			<container name="footer-content-after">
+                <block name="footer-payment" template="Magento_Theme::html/footer/payment.phtml"/>
+			</container>
+			
+			<container name="footer-column-col-links">
+				<block class="Magento\Cms\Block\Block" name="footer_row_links_block">
+					<arguments>
+						<argument name="block_id" xsi:type="string">footer_row_links</argument>
+					</arguments>
+				</block>
+			</container>
+        </referenceBlock>
+ <!-- scroll to top hyva UI -->
+   <referenceContainer name="before.body.end">
+            <block name="scroll.to.top" template="Magento_Theme::scroll-to-top.phtml">
+                <arguments>
+                    <argument name="position" xsi:type="string">end</argument> <!-- Button position (start/center/end) -->
+                    <argument name="visible_offset" xsi:type="number">200</argument> <!-- Offset before showing the button -->
+                    <argument name="visible_only_to_top" xsi:type="boolean">true</argument> <!-- Only show when scrolling to top (true/false) -->
+                    <argument name="hide_on_inactivity" xsi:type="number">4000</argument> <!-- Hide after x ms -->
+                </arguments>
+            </block>
+        </referenceContainer>
+
+    </body>
+</page>

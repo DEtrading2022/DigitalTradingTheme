@@ -1,0 +1,18 @@
+<view xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/view.xsd">
+    <vars module="Magento_Catalog">
+        <var name="gallery">
+            <!-- Add the options here -->
+			 <var name="nav">dots</var> <!-- Gallery navigation style (false/dots) -->
+    <var name="loop">true</var> <!-- Gallery navigation loop (true/false) -->
+    <var name="caption">false</var> <!-- Display alt text as image title (true/false) -->
+    <var name="allowfullscreen">true</var> <!-- Turn on/off fullscreen (true/false) -->
+    <var name="navdir">horizontal</var> <!-- Sliding direction of navigation (horizontal/vertical) -->
+    <!-- `start` & `end` are Hyva Only options -->
+    <var name="arrows">true</var> <!-- Turn on/off arrows on the sides preview (start/end/true/false) -->
+    <!-- Hyva Only options -->
+    <var name="fullscreenicon">false</var> <!-- Turn on/off icon for allowfullscreen (true/false) -->
+    <var name="autoplay">true</var> <!-- Turn on/off autoplay for videos (true/false) -->
+
+        </var>
+    </vars>
+</view>

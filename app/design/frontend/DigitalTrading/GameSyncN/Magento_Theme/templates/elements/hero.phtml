@@ -1,0 +1,224 @@
+<?php
+/**
+ * Hyvä Themes - https://hyva.io
+ * Copyright © Hyvä Themes. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+declare(strict_types=1);
+
+use Hyva\Theme\Model\ViewModelRegistry;
+use Hyva\Theme\ViewModel\LucideIcons;
+use Hyva\Theme\ViewModel\HyvaCsp;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+
+/** @var Escaper $escaper */
+/** @var Template $block */
+/** @var ViewModelRegistry $viewModels */
+/** @var HyvaCsp $hyvaCsp */
+
+/** @var LucideIcons $lucideIcons */
+$lucideIcons = $viewModels->require(LucideIcons::class);
+?>
+
+<section id="hyva-demo-hero" class="prose mb-24 lg:mt-6" aria-labelledby="page-title">
+    <div class="hyva-hero-content pt-6 pb-12 sm:p-16 xl:py-32">
+        <hgroup id="page-title" class="my-0 text-primary-darker text-xl md:text-2xl">
+            <h1 class="mt-0 xl:text-6xl">GameSync - Digitale Game Keys</h1>
+            <p class="my-0 uppercase">Hou je collectie up to date!</p>
+        </hgroup>
+        <p class="mt-8 mb-0 inline-flex flex-wrap gap-4">
+            <a class="btn btn-secondary" href="https://hyva.io/">
+                Bekijk alle sims 4
+                <?= $lucideIcons->chevronsRightHtml('', 20, 20, ['aria-hidden' => 'true']) ?>
+            </a>
+            <button
+                class="btn bg-transparent text-primary-darker p-2"
+                x-data="demoThemeToggle"
+                @click="setNewColor"
+                @contextmenu.prevent="setPrideColor"
+            >
+                <?= $lucideIcons->paletteHtml('', 24, 24, ['title' => 'Preview with a diffrent Colour']); ?>
+            </button>
+        </p>
+    </div>
+    <div class="card p-8 xl:p-12 shadow-md flow-root">
+        <img
+            src="<?= $escaper->escapeHtmlAttr($block->getViewFileUrl('images/hyva-logo.svg')) ?>"
+            alt=""
+            width="60"
+            height="60"
+            loading="eager"
+            class="float-end ms-8 mb-8 md:w-24 md:h-24 lg:w-36 lg:h-36"
+        >
+        <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+  <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+    <div class="col-span-1">
+      <h2 class="text-3xl/tight font-bold text-gray-900 sm:text-4xl">Features for growth</h2>
+
+      <p class="mt-4 text-lg text-pretty text-gray-700">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis tenetur, nemo quam
+        voluptas sunt impedit dolorem asperiores aliquid doloribus fugit.
+      </p>
+    </div>
+
+    <div class="space-y-6">
+      <div class="flex items-start gap-4">
+        <div class="shrink-0 rounded-lg bg-gray-100 p-3 text-gray-700">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6"></path>
+          </svg>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold text-gray-900">Advanced reporting</h3>
+
+          <p class="mt-1 text-gray-700">Track metrics that matter with instant insights</p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4">
+        <div class="shrink-0 rounded-lg bg-gray-100 p-3 text-gray-700">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z"></path>
+          </svg>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold text-gray-900">Collaboration tools</h3>
+
+          <p class="mt-1 text-gray-700">Work together seamlessly across your organization</p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4">
+        <div class="shrink-0 rounded-lg bg-gray-100 p-3 text-gray-700">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 14.25h13.5m-13.5 0a3 3 0 0 1-3-3m3 3a3 3 0 1 0 0 6h13.5a3 3 0 1 0 0-6m-16.5-3a3 3 0 0 1 3-3h13.5a3 3 0 0 1 3 3m-19.5 0a4.5 4.5 0 0 1 .9-2.7L5.737 5.1a3.375 3.375 0 0 1 2.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 0 1 .9 2.7m0 0a3 3 0 0 1-3 3m0 3h.008v.008h-.008v-.008Zm0-6h.008v.008h-.008v-.008Zm-3 6h.008v.008h-.008v-.008Zm0-6h.008v.008h-.008v-.008Z"></path>
+          </svg>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold text-gray-900">Third-party connectors</h3>
+
+          <p class="mt-1 text-gray-700">Connect with your favorite tools and services</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
+	<div role="alert" class="rounded-md border border-green-500 bg-green-50 p-4 shadow-sm dark:border-green-400 dark:bg-green-800">
+  <div class="flex items-start gap-4">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="-mt-0.5 size-6 text-green-700 dark:text-green-200">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+    </svg>
+
+    <div class="flex-1">
+      <strong class="block leading-tight font-medium text-green-800 dark:text-green-100">
+        Success
+      </strong>
+
+      <p class="mt-0.5 text-sm text-green-700 dark:text-green-200">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ducimus, dignissimos.
+      </p>
+    </div>
+  </div>
+</div>
+</section>
+
+<style>
+    #hyva-demo-hero {
+        --_clr: color-mix(in oklch, var(--color-primary-lighter) 20%, #0000);
+        --_clr-alt: color-mix(in oklch, var(--color-secondary-lighter) 20%, #0000);
+        --_bg: radial-gradient(circle at 60%, var(--_clr-alt), var(--_clr));
+        --_gap: calc(var(--spacing) * 8);
+        --_radius: calc(var(--spacing) * 4);
+    }
+
+    .hyva-hero-content {
+        border-image: var(--_bg) fill 0 / 1 / var(--_gap) 20vw;
+    }
+
+    @media (width >= 40rem) {
+        #hyva-demo-hero {
+            display: grid;
+            grid-template-columns: minmax(auto, 1fr) var(--_gap) minmax(auto, 1.5fr);
+            grid-template-rows: calc(var(--_gap) * 5) auto var(--_gap) auto;
+
+            &::before {
+                z-index: -1;
+                content: "";
+                background-image: var(--_bg);
+                border-radius: var(--_radius);
+                grid-column: 1 / -1;
+                grid-row: 1 / 4;
+            }
+
+            & .card {
+                grid-column: 1 / -1;
+                grid-row: 3 / 5;
+                margin-inline: calc(var(--_radius) * 2);
+                border-radius: var(--_radius);
+            }
+        }
+
+        .hyva-hero-content {
+            border-image: none;
+            grid-column: 1 / -1;
+            grid-row: 1 / 3;
+        }
+    }
+
+    @media (width >= 80rem) {
+        #hyva-demo-hero {
+            --_radius: calc(var(--spacing) * 6);
+
+            &::before {
+                grid-row: 1 / 3;
+            }
+
+            & .card {
+                grid-column: 2 / -1;
+                grid-row: 2 / 5;
+            }
+        }
+
+        .hyva-hero-content {
+            grid-column: 1 / 3;
+        }
+    }
+</style>
+
+<script>
+    window.addEventListener('alpine:init', () => Alpine.data('demoThemeToggle', () => ({
+        degrees: [265, 150, 25, 310, 290],
+        degreesAlt: [150, 210, 290, 0, 50],
+        index: 0,
+        easterEgg: false,
+        setNewColor() {
+            this.index = (this.degrees.length - 1) === this.index ? 0 : this.index + 1;
+            const hue = this.degrees[this.index];
+            const hueAlt = this.degreesAlt[this.index];
+            const root = document.documentElement;
+
+            root.style.setProperty('--color-primary-lighter', `oklch(52% .2 ${hue})`);
+            root.style.setProperty('--color-primary', `oklch(46% .2 ${hue})`);
+            root.style.setProperty('--color-primary-darker', `oklch(28% .2 ${hue})`);
+
+            root.style.setProperty('--color-secondary-lighter', `oklch(72% .2 ${hueAlt})`);
+            root.style.setProperty('--color-secondary', `oklch(53% .15 ${hueAlt})`);
+            root.style.setProperty('--color-secondary-darker', `oklch(39% .1 ${hueAlt})`);
+        },
+        setPrideColor() {
+            this.easterEgg = !this.easterEgg;
+            const root = document.getElementById('hyva-demo-hero');
+            const value = this.easterEgg
+                ? 'linear-gradient(45deg in oklch longer hue, #fecaca, #f5d0fe)'
+                : 'radial-gradient(circle at 60%, var(--_clr-alt), var(--_clr))';
+            root.style.setProperty('--_bg', value);
+        }
+    })), { once: true })
+</script>
+<?php $hyvaCsp->registerInlineScript() ?>

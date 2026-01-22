@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <move element="category.description" destination="content" after="-"/>
+		<!-- truncate category title-->
+		<referenceBlock name="page.main.title">
+			<arguments>
+				<argument name="css_class" xsi:type="string">truncate block</argument>
+			</arguments>
+		</referenceBlock>
+		<!-- add category hyva UI product swatch-->
+		<referenceBlock name="category.products.list">
+            <arguments>
+                <argument name="hide_rating_summary" xsi:type="boolean">false</argument>
+            </arguments>
+        </referenceBlock>
+
+    </body>
+</page>

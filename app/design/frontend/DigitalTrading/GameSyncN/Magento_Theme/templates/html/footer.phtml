@@ -1,0 +1,150 @@
+<?php
+/**
+ * Hyvä Themes - https://hyva.io
+ * Copyright © Hyvä Themes 2020-present. All rights reserved.
+ * This product is licensed per Magento install
+ * See https://hyva.io/license
+ */
+
+declare(strict_types=1);
+
+use Hyva\Theme\ViewModel\HyvaCsp;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+
+/** @var Escaper $escaper */
+/** @var Template $block */
+/** @var HyvaCsp $hyvaCsp */
+
+// Remove any child blocks that don't need to be part of the footer columns
+$footerColumns = array_diff(
+    $block->getChildNames(),
+    array('footer-copyright', 'form.subscribe', 'footer-content-before', 'footer-content-after', 'footer-column-col-links')
+);
+?>
+
+<?= $block->getChildHtml('footer-content-before') ?>
+<?= $block->getChildHtml('subscribe') ?>
+<div class="bg-zinc-100 border-t border-zinc-200">
+    <div class="container py-8 mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-6 lg:gap-6 text-slate-600">
+            <?php foreach ($footerColumns as $childName): ?>
+                <?= $block->getBlockHtml($childName) ?>
+            <?php endforeach; ?>
+        </div>
+    </div>
+    <?php if ($footerContentAfter = $block->getChildHtml('footer-content-after')): ?>
+        <div class="space-y-10 bg-zinc-50 py-4">
+            <?= /** @noEscape */ $footerContentAfter ?>
+        </div>
+    <?php endif; ?>
+    <div class="container pt-7 pb-5 border-t border-zinc-200 flex justify-between items-center flex-col sm:flex-row text-sm">
+        <?= $block->getChildHtml('copyright') ?>
+        <nav class="text-slate-600" aria-label="<?= $escaper->escapeHtml(__('Legal Menu')) ?>">
+            <a href="<?= $escaper->escapeUrl($block->getUrl('algemene-voorwaarden-gamesync')) ?>" class="inline-block py-1 px-2 sm:px-0 sm:mr-4 sm:last:mr-0 hover:underline"><?= $escaper->escapeHtml(__('Terms & Conditions')) ?></a>
+            <a href="<?= $escaper->escapeUrl($block->getUrl('privacy-policy-cookie-restriction-mode')) ?>" class="inline-block py-1 px-2 sm:px-0 sm:mr-4 sm:last:mr-0 hover:underline"><?= $escaper->escapeHtml(__('Privacy Policy')) ?></a>
+        </nav>
+	</div>
+   	
+	<?php 
+	$footerRowLinksBlock = $block->getLayout()->getBlock('footer_row_links_block');
+	$footerRowLinks = $footerRowLinksBlock ? $footerRowLinksBlock->toHtml() : '';
+	?>
+	<?php if ($footerRowLinks): ?>
+	<div class="border-t border-gray-300 bg-gray-100">
+		<div class="container py-2 sm:py-4">
+			<div x-data="mobileFooterCollpase()" x-bind="eventListeners" data-open="false">
+				<div 
+					x-bind="setToggleRoles" 
+					@click="toggle()" 
+					@keydown.enter="toggle()" 
+					@keydown.space.prevent="toggle()"
+					data-id="footer-row-links-content"
+					class="flex justify-between items-center cursor-pointer lg:cursor-default"
+				>
+					<h3 class="text-sm font-semibold text-slate-700">
+						<?= $escaper->escapeHtml(__('Links')) ?>
+					</h3>
+					<svg 
+						x-ref="toggleIcon"
+						class="w-5 h-5 transition-transform duration-200 lg:hidden"
+						:class="{ 'rotate-180': open }"
+						fill="none" 
+						stroke="currentColor" 
+						viewBox="0 0 24 24"
+					>
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+					</svg>
+				</div>
+				<div 
+					x-show="isOpen()"
+					x-collapse
+					x-bind="setCollapseRoles"
+					id="footer-row-links-content"
+					class="mt-3 text-sm text-slate-600"
+				>
+					<?= /** @noEscape */ $footerRowLinks ?>
+				</div>
+			</div>
+		</div>
+	</div>
+	<?php endif; ?>
+	
+	
+		
+</div>
+<script>
+    function mobileFooterCollpase() {
+        return {
+            open: false,
+            isMobile: false,
+            init() {
+                this.checkIsMobileResolution();
+                if (this.$root.dataset.open === "true") {
+                    this.open = true;
+                }
+            },
+            checkIsMobileResolution() {
+                this.isMobile = getComputedStyle(this.$refs.toggleIcon).display !== 'none'
+            },
+            isOpen() {
+                return this.isMobile ? this.open : true;
+            },
+            toggle() {
+                return this.isMobile ? this.open = !this.open : true;
+            },
+            eventListeners: {
+                ['@resize.window.debounce']() {
+                    this.checkIsMobileResolution();
+                },
+                ['@visibilitychange.window.debounce']() {
+                    this.checkIsMobileResolution();
+                }
+            },
+            setToggleRoles: {
+                [':role']() {
+                    return this.isMobile && 'button';
+                },
+                [':tabindex']() {
+                    return this.isMobile && '0';
+                },
+                [':aria-expanded']() {
+                    return this.isMobile ? this.open : null;
+                },
+                [':aria-controls']() {
+                    return this.isMobile ? this.$el.dataset.id : null;
+                }
+            },
+            setCollapseRoles: {
+                [':aria-hidden']() {
+                    return this.isMobile ? !this.open : null;
+                },
+                [':aria-labelledby']() {
+                    return this.isMobile ? this.$el.id : null;
+                }
+            }
+        }
+    }
+    window.addEventListener('alpine:init', () => Alpine.data('mobileFooterCollpase', mobileFooterCollpase), { once: true })
+</script>
+<?php $hyvaCsp->registerInlineScript() ?>

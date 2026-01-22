@@ -1,0 +1,52 @@
+<?php
+/**
+ * Hyvä Themes - https://hyva.io
+ * Copyright © Hyvä Themes 2020-present. All rights reserved.
+ * This product is licensed per Magento install
+ * See https://hyva.io/license
+ */
+
+declare(strict_types=1);
+
+use Hyva\Theme\Model\ViewModelRegistry;
+use Hyva\Theme\ViewModel\HeroiconsOutline;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Magento\Cms\Block\Block as CmsBlock;
+
+/** @var Escaper $escaper */
+/** @var Template $block */
+/** @var ViewModelRegistry $viewModels */
+
+/** @var HeroiconsOutline $heroicons */
+$heroicons = $viewModels->require(HeroiconsOutline::class);
+?>
+
+<!--div class="bg-blue-900 text-white text-sm leading-5 font-semibold text-center p-2">
+    <a href="#" class="hover:underline">
+        <?= $escaper->escapeHtml(__('Get ready for a dazzling summer with our new arrivals')) ?>
+        <?= $heroicons->chevronRightHtml(
+            'inline-block align-text-bottom text-blue-300',
+            16,
+            16,
+            ['aria-hidden' => 'true', 'stroke-width' => '4']
+        ); ?>
+    </a>
+</div-->
+<div class="color-background-top-header text-white text-sm leading-5 font-semibold text-center md:py-0 p-2 lg:py-0.5 lg:px-2">
+        <div class="container flex justify-between overflow-hidden relative px-0 lg:h-8 ">
+            <div class="hidden md:block mx-6">
+                <?= $this->getLayout()
+                        ->createBlock(CmsBlock::class)
+                        ->setBlockId('webwinkel_left')
+                        ->toHtml();?>
+            </div>
+            <div class="whitespace-nowrap marquee md:!animate-none flex items-center">
+                <a href="www.gamesync.nl" class="hover:opacity-90 flex gap-x-4">
+                    <span><?= $escaper->escapeHtml(__('1. Choose product &amp; Pay')) ?></span>
+                    <span><?= $escaper->escapeHtml(__('2. Receive your code by email')) ?></span>
+                    <span><?= $escaper->escapeHtml(__('3. Activate, Download and Play')) ?></span>
+                </a>
+            </div>
+        </div>
+</div>

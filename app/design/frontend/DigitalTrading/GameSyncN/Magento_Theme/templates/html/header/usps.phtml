@@ -1,0 +1,44 @@
+<?php
+/**
+ * Hyvä Themes - https://hyva.io
+ * Copyright © Hyvä Themes 2020-present. All rights reserved.
+ * This product is licensed per Magento install
+ * See https://hyva.io/license
+ */
+
+declare(strict_types=1);
+
+use Hyva\Theme\Model\ViewModelRegistry;
+use Hyva\Theme\ViewModel\HeroiconsOutline;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+
+/** @var Escaper $escaper */
+/** @var Template $block */
+/** @var ViewModelRegistry $viewModels */
+
+/** @var HeroiconsOutline $heroicons */
+$heroicons = $viewModels->require(HeroiconsOutline::class);
+$phosphoricons = $viewModels->require(\Jajuma\PhosphorHyva\ViewModel\Phosphoricons::class);
+?>
+
+<div class="px-4 py-2 bg-slate-100 text-slate-600 text-sm text-center font-medium">
+    <ul class="container flex justify-center gap-11 lg:justify-between">
+        <li class="hidden lg:flex items-center gap-3">
+            <?= $phosphoricons->caretDoubleRightDuotoneHtml('text-blue-300',24,24)	?>
+			<span><?= $escaper->escapeHtml(__('Directe Levering per Email')) ?></span>
+        </li>
+        <li class="hidden lg:flex items-center gap-3">
+            <?= $phosphoricons->checkFatDuotoneHtml('text-green-500',25,25)	?>
+            <span><?= $escaper->escapeHtml(__('Free shipping and returns')) ?></span>
+        </li>
+        <li class="hidden lg:flex items-center gap-3">
+            <?= $phosphoricons->acornHtml('text-red-100', 24, 24) ?>
+            <span><?= $escaper->escapeHtml(__('Free returns')) ?></span>
+        </li>
+        <li class="flex items-center gap-3">
+            <?= $heroicons->checkHtml('text-green-500') ?>
+            <span><?= $escaper->escapeHtml(__('Refer a friend and get a discount')) ?></span>
+        </li>
+    </ul>
+</div>
