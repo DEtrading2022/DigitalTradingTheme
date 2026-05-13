@@ -173,15 +173,18 @@ $showLanguage = $block->getShowLanguage() !== null ? (bool) $block->getShowLangu
     <div class="container pt-3.5 lg:pb-3.5 grid grid-cols-[auto_minmax(0px,1fr)_auto]
         lg:grid-cols-[auto_minmax(0px,1fr)_auto] gap-y-3.5 lg:gap-y-0 gap-x-4 lg:gap-x-10 items-center">
         <?= $block->getChildHtml('mobilemenu') ?>
-        <?= $block->getChildHtml('logo'); ?>
-
+<div class="justify-self-center">       
+	   <?= $block->getChildHtml('logo'); ?>
+</div>
         <div class="ml-auto flex gap-0.5 items-center lg:order-2">
             <?php if ($showCompare): ?>
                 <?= $block->getChildHtml('compare'); ?>
             <?php endif; ?>
 
             <?php if ($showLanguage): ?>
-                <?= $block->getChildHtml('store-language-switcher'); ?>
+                <div class="hidden md:block">
+				<?= $block->getChildHtml('store-language-switcher'); ?>
+				</div>
             <?php endif; ?>
 
             <?= $block->getChildHtml('additional') ?>

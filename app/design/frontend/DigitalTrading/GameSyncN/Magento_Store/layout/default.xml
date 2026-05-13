@@ -23,6 +23,13 @@
                 </arguments>
             </block>
         </referenceBlock>
+		<referenceBlock name="topmenu_mobile">
+            <block
+                name="topmenu_mobile.store-language-switcher"
+                as="store-language-switcher"
+                template="Magento_Store::header/menu/languages.phtml"
+            />
+        </referenceBlock>
 
         <!-- Optionally remove the default one, in the footer -->
         <!-- <referenceBlock name="store-language-switcher" remove="true"/> -->

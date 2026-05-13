@@ -1,0 +1,85 @@
+iframe.wwk-widget-iframe {
+    @apply !ml-0 !scale-100;
+}
+.trustpilot-widget {
+    @apply md:-ml-[20px] lg:ml-0 xl:-ml-[22px];
+    
+}
+.item-ads-content {
+    @apply font-play hover:text-customRed;
+}
+
+.product-info-right {
+    @apply text-[#888]
+}
+
+.product-sidebar-info {
+    @apply w-full;
+}
+
+.product-static-text {
+    @apply md:pt-10 md:pr-0 md:pl-0 md:flex md:flex-col md:items-end lg:pt-0 gap-y-8;
+}
+.product-ads-content {
+    ul.items {
+        @apply mb-4 flex flex-col gap-y-3;
+    }
+}
+.wgt-tab-title {
+    @apply flex  flex-col lg:flex-row gap-x-10 lg:border-b-2 border-gray-200;
+}
+.product-tab-wrapper {
+    @apply rounded-lg lg:p-4;
+}
+.prose {
+    @apply max-w-full;
+}
+.wgt-tab-content {
+   @apply py-4;
+}
+.tab-control{
+   @apply relative py-2 xl:p-2 font-play border-b-2 lg:border-b-0 uppercase;
+}
+.tab-control.active{
+   @apply  border-b-2 border-customRed text-customRed;
+}
+.tab-control::before {
+    content: '';
+    background: url('../images/arrow.svg');
+    @apply absolute top-2 right-2 w-5 h-5 transition-transform bg-no-repeat lg:hidden;
+}
+.tab-control.active::before {
+    @apply rotate-180;
+}
+.awsome_input:focus+.awsome_input_border{
+    @apply w-full;
+}
+.awsome_input_border{
+    @apply bg-customRed inline-block w-0 relative -top-[15px];
+    height: 1px;
+    -webkit-transition: all ease-in-out .15s;
+    -o-transition: all ease-in-out .15s;
+    transition: all ease-in-out .15s;
+}
+.input_container{
+   @apply text-center;
+}
+.popup-product-detail p, ol {
+    @apply text-sm font-normal font-play text-[#888888];
+}
+.popup-product-detail .img-popup {
+    @apply mb-10;
+}
+.asterisk-placeholder {
+    transition: all 0.1s ease;
+    @apply absolute top-[9px] left-0 flex gap-0.5;
+}
+.asterisk-placeholder:before {
+    content: '*';
+    @apply text-customRed;
+}
+
+.awsome_input:focus ~ .asterisk-placeholder, 
+.awsome_input:not(:focus):valid ~ .asterisk-placeholder {
+    @apply text-customRed -top-[15px] bottom-0 left-0 text-[10px] opacity-100;
+}

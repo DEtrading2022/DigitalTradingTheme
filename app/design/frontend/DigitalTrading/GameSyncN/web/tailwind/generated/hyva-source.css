@@ -18,8 +18,6 @@
 @source "../../../../../../../../vendor/mirasvit/module-kb-hyva/src/MirasvitKb/**/*.xml";
 @source "../../../../../../../../vendor/hyva-themes/magento2-mirasvit-seo/src/**/*.phtml";
 @source "../../../../../../../../vendor/hyva-themes/magento2-mirasvit-seo/src/**/*.xml";
-@source "../../../../../../../../vendor/mollie/magento2-hyva-compatibility/src/Mollie_HyvaCompatibility/**/*.phtml";
-@source "../../../../../../../../vendor/mollie/magento2-hyva-compatibility/src/Mollie_HyvaCompatibility/**/*.xml";
 @source "../../../../../../../../vendor/hyva-themes/magento2-hyva-widgets/src/**/*.phtml";
 @source "../../../../../../../../vendor/hyva-themes/magento2-hyva-widgets/src/**/*.xml";
 @source "../../../../../../../../vendor/jajuma/hyva-faq/**/*.phtml";
@@ -29,6 +27,6 @@
 
 @import "../../../../../../../../vendor/magewirephp/magewire/src/view/frontend/tailwind/tailwind-source.css";
 @import "../../../../../../../../vendor/mirasvit/module-kb-hyva/src/MirasvitKb/view/frontend/tailwind/tailwind-source.css";
-@import "../../../../../../../../vendor/mollie/magento2-hyva-compatibility/src/Mollie_HyvaCompatibility/view/frontend/tailwind/tailwind-source.css";
 
+@import "../../../../../../../../vendor/mollie/magento2-hyva-compatibility/src/Mollie_HyvaCompatibility/view/frontend/tailwind/module.css";
 

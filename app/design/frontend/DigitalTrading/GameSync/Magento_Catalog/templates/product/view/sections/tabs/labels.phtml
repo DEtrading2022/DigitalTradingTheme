@@ -1,0 +1,11 @@
+<?php
+
+$tabId = $block->getData('tab_id');
+$tabLabel = $block->getData('tab_label');
+?>
+<label @click="activeTab = <?= $tabId ?>"
+       class="tab-control"
+       :class="{ 'active': activeTab === <?= $tabId ?> }"
+>
+    <?= $tabLabel ?>
+</label>

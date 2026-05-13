@@ -1,0 +1,108 @@
+<?php
+/**
+ * Hyvä Themes - https://hyva.io
+ * Copyright © Hyvä Themes 2020-present. All rights reserved.
+ * This product is licensed per Magento install
+ * See https://hyva.io/license
+ */
+declare(strict_types=1);
+/** @var Details $block */
+
+/** @var Escaper $escaper */
+
+use Magento\Catalog\Block\Product\View\Details;
+use Magento\Framework\Escaper;
+
+$titleRenderer = $block->getChildBlock('product.section.title.renderer');
+$defaultTitleTemplate = $titleRenderer->getTemplate();
+
+?>
+<div x-data="{ activeTab:  0 }" class="product-tab-wrapper">
+    <?php $defaultTabSwitch = str_replace('</div>', '', $block->getChildHtml('tabs.switcher')) ?>
+
+    <?php
+    $currentTabId = 2;
+    $htmlString = '';
+    ?>
+    <?php foreach ($block->getGroupSortedChildNames('detailed_info', '') as $sectionName) {
+        $sectionBlock = $block->getLayout()->getBlock($sectionName);
+        $sectionHtml = (string)$sectionBlock->toHtml();
+        $titleTemplate = $sectionBlock->getData('title_template') ?? $defaultTitleTemplate;
+        if (empty(trim($sectionHtml))) {
+            continue;
+        }
+        ?>
+        <?php
+        $currentTabId = $currentTabId + 1;
+        $htmlString .= '<label @click="activeTab = ' . ($currentTabId) . '"
+                              class="tab-control"
+                              :class="{ \'active\': activeTab === ' . ($currentTabId) . ' }"
+        >' .
+            $titleRenderer->setTemplate($titleTemplate)
+                ->assign('sectionBlock', $sectionBlock)
+                ->toHtml()
+            .
+            '</label>';
+        ?>
+    <?php } ?>
+
+    <?= $defaultTabSwitch . $htmlString . '</div>' ?>
+
+    <?php
+    $defaultTabContent = '';
+    $defaultTabExtendContent = '';
+
+    ?>
+ 
+    <?php $tabs = $block->getLayout()->getChildBlocks('tabs.elements') ?>
+    <?php foreach ($tabs as $tab): ?>
+        <div x-show.transition.in.opacity.duration.600="activeTab === <?= $tab->getData('tab_id') ?>" class="wgt-tab-content">
+            <?= $tab->toHtml() ?>
+        </div>
+    <?php endforeach; ?>
+
+
+    <?php
+    $currentContentId = 2;
+    $htmlStringContent = '' ?>
+    <?php foreach ($block->getGroupSortedChildNames('detailed_info', '') as $sectionName) {
+        $currentContentId = $currentContentId + 1;
+        $sectionBlock = $block->getLayout()->getBlock($sectionName);
+        $sectionHtml = (string)$sectionBlock->toHtml();
+        $titleTemplate = $sectionBlock->getData('title_template') ?? $defaultTitleTemplate;
+
+        if (empty(trim($sectionHtml))) {
+            continue;
+        }
+        ?>
+        <?php
+        $htmlStringContent .= '<div x-show.transition.in.opacity.duration.600="activeTab === ' . $currentContentId . '" class="wgt-tab-content">
+            ' . $sectionHtml . '
+        </div>';
+        ?>
+    <?php } ?>
+    <?= $htmlStringContent ?>
+    <script>
+    function updateLayout() {
+        const productTabsContainer = document.querySelector('.product-tab-wrapper');
+        const tabTitleContainer = document.querySelector('.wgt-tab-title');
+        const tabControls = tabTitleContainer.querySelectorAll('label.tab-control');
+        const tabContents = document.querySelectorAll('.wgt-tab-content');
+
+        if (window.innerWidth < 1024) {
+            tabControls.forEach((tabControl, index) => {
+                const content = tabContents[index];
+                tabControl.insertAdjacentElement('afterend', content);
+            });
+        } else {  
+            tabControls.forEach((tabControl, index) => {
+                const content = tabContents[index];
+                productTabsContainer.appendChild(content);
+            });
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', updateLayout);
+    window.addEventListener('resize', updateLayout);
+</script>
+</div>

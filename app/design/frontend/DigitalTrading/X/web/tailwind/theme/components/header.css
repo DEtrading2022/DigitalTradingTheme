@@ -1,0 +1,19 @@
+.page-header {
+}
+li.level-0:hover>a.title-header-hover {
+    @apply text-[#48A7E8];
+}
+.hover-div:hover span {
+    @apply text-[#ea5210];
+}
+.menu-wrapper:hover .menu-label {
+    @apply text-[#ea5210]
+}
+li.level-0:last-child .sub-category-hover {
+    @apply right-0;
+    left: unset;
+}
+
+iframe.wwk-widget-iframe {
+    @apply scale-[0.68] -mt-[5px] mr-0 -mb-[4px] -ml-[42px];
+}

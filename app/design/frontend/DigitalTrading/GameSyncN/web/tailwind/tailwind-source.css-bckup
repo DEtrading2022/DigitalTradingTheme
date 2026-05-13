@@ -1,0 +1,105 @@
+/**
+ * Welcome to your Hyvä Theme!
+ *
+ * This is the main entry file for your theme's CSS, processed by Tailwind CSS.
+ *
+ * If you're new to TailwindCSS, get started with the official documentation:
+ * https://tailwindcss.com/
+ *
+ * To learn about creating a Hyvä Theme, check out the build guide:
+ * https://docs.hyva.io/hyva-themes/building-your-theme/index.html
+ *
+ * For Hyvä-specific topics, such as merging module CSS or using design tokens,
+ * please refer to the documentation:
+ * https://docs.hyva.io/hyva-themes/working-with-tailwindcss/index.html
+ */
+
+@import "@hyva-themes/hyva-modules/css";
+@import "tailwindcss" source(none);
+@source "../../**/*.phtml";
+@source "../../**/*.xml";
+@source inline('{sm:,md:,lg:,xl:,}grid-cols-{1,2,3,4,5,6,7,8,9,10,11,12}');
+
+/* Custom styles */
+@import "./base";
+@import "./components";
+@import "./theme";
+@import "./utilities";
+
+/* Import generated styles for Hyvä Compatible Modules and Design Tokens */
+@import "./generated/hyva-source.css";
+@import "./generated/hyva-tokens.css";
+
+@theme {
+	/* Footer link hover color variable */
+    --color-footer-link-hover: #EA5210;
+	
+    --color-bg: var(--color-slate-50);
+    --color-fg: var(--color-slate-950);
+    --color-fg-secondary: var(--color-slate-600);
+    --color-surface: var(--color-white);
+	--font-display: "Satoshi", "sans-serif";
+	--font-sans: "play","sans-serif";
+	--color-gs-button: #EA5120;
+	--color-gs-button-blue: #1979c3;
+	--color-background-top-header:#F3734B; 
+	--color-sims-groen: #52a32c;
+	--color-sims-blauw: #0071bc;
+	--font-family-sims: "Sims Sans", sans-serif;
+	
+/* topmenu background gradient */
+--bg-gamesync-gradient: linear-gradient(
+        to bottom,
+        #0095e0 0%,
+        #059ee5 24%,
+        #11b1f1 68%,
+        #20b7ee 97%,
+        #12a0d4 100%
+    );
+    --background-image-gamesync: var(--bg-gamesync-gradient);
+
+  /* De merkkleur */
+  --color-brand-orange: #EA5210;
+
+  /* De herbruikbare class variabele */
+  --ui-animated-underline: relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-[--color-brand-orange] after:transition-all after:duration-300 after:ease-in-out hover:after:w-full;
+
+/* Hoofdkleuren gebaseerd op de Synce Trading identiteit */
+  --color-synce-navy: #0A192F;       /* Diepe achtergrond/navbar kleur */
+  --color-synce-primary: #1E3A8A;    /* Corporate donkerblauw */
+  --color-synce-accent: #00AEEF;     /* Helder blauw/Cyan voor knoppen en acties */
+  --color-synce-orange: #EA5210;     /* De gevraagde accentkleur voor underlines/alerts */
+  
+  /* Grijstinten voor tekst en borders */
+  --color-synce-text-dark: #1F2937;
+  --color-synce-text-light: #F3F4F6;
+  --color-synce-border: #E5E7EB;
+
+  /* Herbruikbare UI Variabelen (v4 feature) */
+  --ui-animated-underline: relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-[--color-synce-orange] after:transition-all after:duration-300 after:ease-in-out hover:after:w-full;
+  
+  --ui-glass-card: backdrop-blur-md bg-white/10 border border-white/20 rounded-xl shadow-lg;
+}
+@layer components {
+    .footer-links-container ul li a,
+    .footer-column-non-collapsible ul li a {
+        @apply relative inline-block py-1 transition-colors duration-300;
+    }
+    
+    .footer-links-container ul li a::after,
+    .footer-column-non-collapsible ul li a::after {
+        content: '';
+        @apply absolute bottom-0 left-0 h-0.5 w-0 transition-all duration-300 ease-in-out;
+        background-color: var(--footer-link-hover-color, #EA5210);
+    }
+    
+    .footer-links-container ul li a:hover,
+    .footer-column-non-collapsible ul li a:hover {
+        color: var(--footer-link-hover-color, #EA5210);
+    }
+    
+    .footer-links-container ul li a:hover::after,
+    .footer-column-non-collapsible ul li a:hover::after {
+        @apply w-full;
+    }
+}

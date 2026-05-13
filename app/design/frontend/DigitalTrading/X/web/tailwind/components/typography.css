@@ -1,0 +1,30 @@
+@layer utilities {
+    /* This class only exists for backwards compatibility, */
+    /* The default is applied in tailwind.config.js since Hyvä 1.2.0 */
+    .text-sans-serif {
+        font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    }
+}
+
+html {
+    @apply antialiased;
+}
+/* Play font 400 */
+@font-face {
+    font-family: 'Play';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("../fonts/Play-Regular.ttf") format('truetype');
+}
+/* Play font 600 */
+@font-face {
+    font-family: 'Play';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url("../fonts/Play-Bold.ttf") format('truetype');
+}
+body {
+    @apply text-black leading-normal text-base tracking-normal;
+}

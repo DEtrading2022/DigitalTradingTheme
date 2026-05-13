@@ -1,0 +1,36 @@
+.cmsb5-tilte-footer {
+    @apply text-[#00a6e8];
+}
+.contact-item {
+    @apply flex gap-x-2 leading-none items-end;
+}
+.footer-collapse-container, .address-info {
+    @apply flex flex-col gap-y-4 font-play;
+    .list-item-footer {
+        @apply hidden lg:flex flex-col gap-y-2 lg:gap-y-1
+    }
+}
+.logo-img-container {
+    @apply -ml-[9px];
+}
+
+.heading-item-footer {
+    @apply flex justify-between;
+}
+.rotate-arrow {
+    @apply block lg:hidden;
+}
+.item-link-footer:hover {
+    @apply text-[#ea5210] no-underline relative;
+}
+.item-link-footer::before {
+    @apply absolute left-0 w-[0%] content-[''] bottom-0 bg-[#ea5210] block h-[1px];
+    transition: width 0.3s ease;
+}
+
+.item-link-footer:hover::before {
+    @apply w-full;
+}
+.full-w-row {
+    @apply w-full;
+}

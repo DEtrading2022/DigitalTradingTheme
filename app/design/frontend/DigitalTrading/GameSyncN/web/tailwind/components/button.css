@@ -74,6 +74,9 @@
 
     --btn-disabled-stroke: #0000;
 }
+@ultility btn-scroll-to-top{
+}
+
 
 .btn-flat {
     --btn-stroke: #0000;

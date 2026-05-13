@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="page.main.title">
+                <arguments>
+                    <argument name="css_class" xsi:type="string">mt-0 product text-3xl font-semibold md:px-0 md:mt-10 md:mb-3</argument>
+                    <argument name="add_base_attribute" xsi:type="string">itemprop="name"</argument>
+                </arguments>
+        </referenceBlock>
+
+        <!-- Custom product Tab -->
+        <!-- Init tab container -->
+        <referenceBlock name="product.info.details">
+            <container name="tabs.switcher" htmlTag="div" htmlClass="wgt-tab-title"/>
+            <container name="tabs.elements" />
+                        <block class="Magento\Review\Block\Product\View" name="custom_review_list_and_form"
+                   template="Magento_Catalog::customReview.phtml">
+                <block class="Magento\Review\Block\Product\View" name="review_list_custom"
+                       template="Magento_Review::product/view/list.phtml"
+                       ifconfig="catalog/review/active"
+                >
+                    <arguments>
+                        <argument name="heading_tag" xsi:type="string">h2</argument>
+                    </arguments>
+                    <block class="Magento\Theme\Block\Html\Pager" name="review_list.toolbar" ifconfig="catalog/review/active">
+                        <arguments>
+                            <argument name="pagination_url_anchor" xsi:type="string">customer-review-list</argument>
+                        </arguments>
+                    </block>
+                </block>
+                <block class="Magento\Review\Block\Form"
+                       name="product.review.form.custom"
+                       template="Magento_Review::form.phtml"
+                       ifconfig="catalog/review/active">
+                    <container name="product.review.form.fields.before.custom"
+                               as="form_fields_before"
+                               label="Review Form Fields Before"
+                    />
+                </block>
+
+            </block>
+
+        </referenceBlock>
+        <!-- End init tab container -->
+        <!-- Move block Default to product tab -->
+        <referenceBlock name="product.info.review" remove="true"/>
+        <referenceBlock name="review_list" remove="true"/>
+        <referenceBlock name="product.review.form" remove="true"/>
+
+        <move element="description" destination="tabs.elements" before="-" />
+        <move element="product.attributes" destination="tabs.elements" after="description" />
+        <move element="custom_review_list_and_form" destination="tabs.elements" after="product.attributes" />
+        <!-- End move block Default to product tab -->
+
+        <referenceBlock name="custom_review_list_and_form">
+            <arguments>
+                <argument name="tab_id" xsi:type="string">2</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="product.attributes">
+            <arguments>
+                <argument name="tab_id" xsi:type="string">1</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="description">
+            <arguments>
+                <argument name="tab_id" xsi:type="string">0</argument>
+            </arguments>
+        </referenceBlock>
+
+
+        <referenceContainer name="tabs.switcher">
+            <block template="Magento_Catalog::product/view/sections/tabs/labels.phtml">
+                <arguments>
+                    <argument name="tab_id" xsi:type="string">0</argument>
+                    <argument name="tab_label" xsi:type="string" translate="true">Description</argument>
+                </arguments>
+            </block>
+            <block template="Magento_Catalog::product/view/sections/tabs/labels.phtml">
+                <arguments>
+                    <argument name="tab_id" xsi:type="string">1</argument>
+                    <argument name="tab_label" xsi:type="string" translate="true">More Information</argument>
+                </arguments>
+            </block>
+            <block template="Magento_Catalog::product/view/sections/tabs/labels.phtml">
+                <arguments>
+                    <argument name="tab_id" xsi:type="string">2</argument>
+                    <argument name="tab_label" xsi:type="string" translate="true">Review</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

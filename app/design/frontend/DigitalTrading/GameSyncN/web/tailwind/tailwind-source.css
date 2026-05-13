@@ -13,7 +13,6 @@
  * please refer to the documentation:
  * https://docs.hyva.io/hyva-themes/working-with-tailwindcss/index.html
  */
-
 @import "@hyva-themes/hyva-modules/css";
 @import "tailwindcss" source(none);
 @source "../../**/*.phtml";
@@ -31,24 +30,37 @@
 @import "./generated/hyva-tokens.css";
 
 @theme {
-	/* Footer link hover color variable */
+    /* Footer link hover color variable */
     --color-footer-link-hover: #EA5210;
-	
+    
+    /* Default text and background colors */
+    --color-text-default: #666;
     --color-bg: var(--color-slate-50);
     --color-fg: var(--color-slate-950);
     --color-fg-secondary: var(--color-slate-600);
     --color-surface: var(--color-white);
-	--font-display: "Satoshi", "sans-serif";
-	--font-sans: "play","sans-serif";
-	--color-gs-button: #EA5120;
-	--color-gs-button-blue: #1979c3;
-	--color-background-top-header:#F3734B; 
-	--color-sims-groen: #52a32c;
-	--color-sims-blauw: #0071bc;
-	--font-family-sims: "Sims Sans", sans-serif;
-	
-/* topmenu background gradient */
---bg-gamesync-gradient: linear-gradient(
+    
+    /* Typography */
+    --font-display: "Satoshi", "sans-serif";
+    --font-sans: "play","sans-serif";
+    --font-family-sims: "Sims Sans", sans-serif;
+    
+    /* Button colors */
+    --color-primary: #00a6e8;
+    --color-button-primary: #00a6e8;
+    --color-button-border: rgb(0, 166, 232);
+    --color-button-text: #00a6e8;
+    --color-gs-button: #EA5120;
+    --color-gs-button-blue: #1979c3;
+    
+    /* Brand colors */
+    --color-background-top-header: #EA5210;
+    --color-sims-groen: #52a32c;
+    --color-sims-blauw: #0071bc;
+    --color-brand-orange: #EA5210;
+    
+    /* Topmenu background gradient */
+    --bg-gamesync-gradient: linear-gradient(
         to bottom,
         #0095e0 0%,
         #059ee5 24%,
@@ -57,30 +69,60 @@
         #12a0d4 100%
     );
     --background-image-gamesync: var(--bg-gamesync-gradient);
-
-  /* De merkkleur */
-  --color-brand-orange: #EA5210;
-
-  /* De herbruikbare class variabele */
-  --ui-animated-underline: relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-[--color-brand-orange] after:transition-all after:duration-300 after:ease-in-out hover:after:w-full;
-
-/* Hoofdkleuren gebaseerd op de Synce Trading identiteit */
-  --color-synce-navy: #0A192F;       /* Diepe achtergrond/navbar kleur */
-  --color-synce-primary: #1E3A8A;    /* Corporate donkerblauw */
-  --color-synce-accent: #00AEEF;     /* Helder blauw/Cyan voor knoppen en acties */
-  --color-synce-orange: #EA5210;     /* De gevraagde accentkleur voor underlines/alerts */
-  
-  /* Grijstinten voor tekst en borders */
-  --color-synce-text-dark: #1F2937;
-  --color-synce-text-light: #F3F4F6;
-  --color-synce-border: #E5E7EB;
-
-  /* Herbruikbare UI Variabelen (v4 feature) */
-  --ui-animated-underline: relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-[--color-synce-orange] after:transition-all after:duration-300 after:ease-in-out hover:after:w-full;
-  
-  --ui-glass-card: backdrop-blur-md bg-white/10 border border-white/20 rounded-xl shadow-lg;
+    
+    /* Synce Trading corporate identity colors */
+    --color-synce-navy: #0A192F;       /* Deep background/navbar color */
+    --color-synce-primary: #1E3A8A;    /* Corporate dark blue */
+    --color-synce-accent: #00AEEF;     /* Bright blue/Cyan for buttons and actions */
+    --color-synce-orange: #EA5210;     /* Accent color for underlines/alerts */
+    
+    /* Gray tones for text and borders */
+    --color-synce-text-dark: #1F2937;
+    --color-synce-text-light: #F3F4F6;
+    --color-synce-border: #E5E7EB;
+    
+    /* Reusable UI Variables (v4 feature) */
+    --ui-animated-underline: relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-[--color-brand-orange] after:transition-all after:duration-300 after:ease-in-out hover:after:w-full;
+    --ui-glass-card: backdrop-blur-md bg-white/10 border border-white/20 rounded-xl shadow-lg;
 }
+
+@layer base {
+    /* Default text color #666 for the entire Hyva store */
+    body {
+        color: #666;
+    }
+    
+    /* Ensure proper inheritance */
+    html {
+        color: #666;
+    }
+    
+    /* Input fields */
+    input,
+    textarea,
+    select {
+        color: #666;
+    }
+    
+    /* Product listings */
+    .product-item,
+    .product-info-main {
+        color: #666;
+    }
+    
+    /* Category descriptions */
+    .category-description {
+        color: #666;
+    }
+    
+    /* CMS content */
+    .cms-content {
+        color: #666;
+    }
+}
+
 @layer components {
+    /* Footer link animation with underline effect */
     .footer-links-container ul li a,
     .footer-column-non-collapsible ul li a {
         @apply relative inline-block py-1 transition-colors duration-300;
@@ -101,5 +143,145 @@
     .footer-links-container ul li a:hover::after,
     .footer-column-non-collapsible ul li a:hover::after {
         @apply w-full;
+    }
+    
+    /* DEFAULT BUTTON STYLES - Primary buttons */
+    .btn,
+    .btn-primary,
+    button[type="submit"],
+    .action.primary,
+    .primary-button,
+    .tocart,
+    button.primary {
+        color: #00a6e8;                                 /* Blue text */
+        border-color: rgb(0, 166, 232);                 /* Blue border */
+        background: rgb(255, 255, 255);                 /* White background (default) */
+        transition: all 0.4s ease-in-out;               /* Smooth fade-in transition */
+        box-shadow: 0 0 0 rgb(0 0 0 / 0);               /* No shadow initially */
+    }
+    
+    /* Button hover state with fade-in transition */
+    .btn:hover,
+    .btn-primary:hover,
+    button[type="submit"]:hover,
+    .action.primary:hover,
+    .primary-button:hover,
+    .tocart:hover,
+    button.primary:hover {
+        background: #00a6e8;                            /* 1. Background fades to #00a6e8 */
+        color: rgb(255, 255, 255);                      /* 2. Text fades to white */
+        border-color: #00a6e8;                          /* Border stays blue */
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1),    /* 3. Drop shadow fades in */
+                    0 2px 4px -2px rgb(0 0 0 / 0.1);
+    }
+    
+    /* Add to cart button */
+    button.tocart,
+    .action.tocart {
+        color: #00a6e8;
+        border-color: rgb(0, 166, 232);
+        background: rgb(255, 255, 255);
+        transition: all 0.4s ease-in-out;
+        box-shadow: 0 0 0 rgb(0 0 0 / 0);
+    }
+    
+    button.tocart:hover,
+    .action.tocart:hover {
+        background: #00a6e8;
+        color: rgb(255, 255, 255);
+        border-color: #00a6e8;
+        box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 
+                    0 4px 6px -4px rgb(0 0 0 / 0.1);
+    }
+    
+    /* Checkout buttons */
+    .checkout-methods-items button,
+    .checkout-payment-method button,
+    #co-shipping-method-form button,
+    .checkout button.primary {
+        color: #00a6e8;
+        border-color: rgb(0, 166, 232);
+        background: rgb(255, 255, 255);
+        transition: all 0.4s ease-in-out;
+        box-shadow: 0 0 0 rgb(0 0 0 / 0);
+    }
+    
+    .checkout-methods-items button:hover,
+    .checkout-payment-method button:hover,
+    #co-shipping-method-form button:hover,
+    .checkout button.primary:hover {
+        background: #00a6e8;
+        color: rgb(255, 255, 255);
+        border-color: #00a6e8;
+        box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 
+                    0 4px 6px -4px rgb(0 0 0 / 0.1);
+    }
+    
+    /* Links that act as buttons */
+    a.btn-primary,
+    a.action.primary {
+        color: #00a6e8;
+        border-color: rgb(0, 166, 232);
+        background: rgb(255, 255, 255);
+        text-decoration: none;
+        transition: all 0.4s ease-in-out;
+        box-shadow: 0 0 0 rgb(0 0 0 / 0);
+    }
+    
+    a.btn-primary:hover,
+    a.action.primary:hover {
+        background: #00a6e8;
+        color: rgb(255, 255, 255);
+        border-color: #00a6e8;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 
+                    0 2px 4px -2px rgb(0 0 0 / 0.1);
+    }
+    
+    /* Product grid add to cart buttons */
+    .product-item .tocart,
+    .product-item button.tocart {
+        color: #00a6e8;
+        border-color: rgb(0, 166, 232);
+        background: rgb(255, 255, 255);
+        transition: all 0.4s ease-in-out;
+        box-shadow: 0 0 0 rgb(0 0 0 / 0);
+    }
+    
+    .product-item .tocart:hover,
+    .product-item button.tocart:hover {
+        background: #00a6e8;
+        color: rgb(255, 255, 255);
+        border-color: #00a6e8;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 
+                    0 2px 4px -2px rgb(0 0 0 / 0.1);
+    }
+}
+
+@layer utilities {
+    /* Utility classes for custom usage */
+    .text-default {
+        color: #666;
+    }
+    
+    .bg-primary {
+        background: rgb(0, 166, 232);
+    }
+    
+    .border-primary {
+        border-color: rgb(0, 166, 232);
+    }
+    
+    .text-button-primary {
+        color: #00a6e8;
+    }
+    
+    .hover-shadow:hover {
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 
+                    0 2px 4px -2px rgb(0 0 0 / 0.1);
+    }
+    
+    .hover-shadow-lg:hover {
+        box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 
+                    0 4px 6px -4px rgb(0 0 0 / 0.1);
     }
 }

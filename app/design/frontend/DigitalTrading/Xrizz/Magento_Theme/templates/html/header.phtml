@@ -1,0 +1,303 @@
+<?php
+/**
+ * Hyvä Themes - https://hyva.io
+ * Copyright © Hyvä Themes 2020-present. All rights reserved.
+ * This product is licensed per Magento install
+ * See https://hyva.io/license
+ */
+
+declare(strict_types=1);
+
+use Hyva\Theme\Model\ViewModelRegistry;
+use Hyva\Theme\ViewModel\HeroiconsOutline;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Magento\Cms\Block\Block as CmsBlock;
+
+/** @var Escaper $escaper */
+/** @var Template $block */
+/** @var ViewModelRegistry $viewModels */
+
+/** @var HeroiconsOutline $heroicons */
+$heroicons = $viewModels->require(HeroiconsOutline::class);
+
+/** @var Hyva\Theme\ViewModel\StoreConfig $storeConfig */
+$storeConfig = $viewModels->require(Hyva\Theme\ViewModel\StoreConfig::class);
+$showMiniCart = $storeConfig->getStoreConfig(\Magento\Checkout\Block\Cart\Sidebar::XML_PATH_CHECKOUT_SIDEBAR_DISPLAY);
+?>
+<script>
+    function initHeader () {
+        return {
+            searchOpen: false,
+            cart: {},
+            isMobile: true,
+            init() {
+                const matchMedia = window.matchMedia("(max-width: 1023px)");
+                this.onChangeMedia(matchMedia);
+
+                if(typeof matchMedia.onchange !== 'object') {
+                    //prevent an old iOS Safari bug where addEventListener does not accept an event type parameter
+                    matchMedia.addListener((event) => this.onChangeMedia(event));
+                } else {
+                    matchMedia.addEventListener(
+                        "change",
+                        (event) => this.onChangeMedia(event)
+                    )
+                }
+            },
+            onChangeMedia(mediaQuery) {
+                if(this.isMobile !== mediaQuery.matches){
+                    this.isMobile = mediaQuery.matches;
+                    if(this.isMobile){
+                        this.$refs.searchContainerMobile.appendChild(this.$refs.searchForm);
+                    }else{
+                        this.$refs.searchContainerDesktop.appendChild(this.$refs.searchForm);
+                    }
+                }
+            },
+            getData(data) {
+                if (data.cart) { this.cart = data.cart }
+            }
+        }
+    }
+    function initCompareHeader() {
+        return {
+            compareProducts: null,
+            itemCount: 0,
+            receiveCompareData(data) {
+                if (data['compare-products']) {
+                    this.compareProducts = data['compare-products'];
+                    this.itemCount = this.compareProducts.count;
+                }
+            }
+        }
+    }
+</script>
+<div
+     x-data="initHeader()"
+     @keydown.window.escape="searchOpen = false;"
+     @private-content-loaded.window="getData(event.detail.data)"
+>
+    <?php
+    /**
+     * This notification could come from a CMS static block.
+     * Create or add to Magento_Theme/layout/default.xml
+     * <referenceBlock name="header-content">
+         <block class="Magento\Cms\Block\Block" name="header-notification">
+           <arguments>
+             <argument name="block_id" xsi:type="string">header-notification</argument>
+           </arguments>
+         </block>
+       </referenceBlock>
+     *
+     * And echo with $block->getChildHtml('header-notification')
+     */
+    ?>
+
+    <div class="bg-[#F3734B] text-white text-sm leading-5 font-semibold text-center md:py-0 p-1 lg:py-0.5 lg:px-2">
+        <div class="container flex justify-between overflow-hidden relative px-0 lg:h-7">
+            <div class="hidden md:block">
+                <?= $this->getLayout()
+                        ->createBlock(CmsBlock::class)
+                        ->setBlockId('webwinkel_left')
+                        ->toHtml();?>
+            </div>
+            <div class="whitespace-nowrap marquee md:!animate-none flex items-center">
+                <a href="www.xrizz.nl" class="hover:opacity-90 flex gap-x-4">
+                    <span><?= $escaper->escapeHtml(__('1. Kies product &amp; betaal')) ?></span>
+                    <span><?= $escaper->escapeHtml(__('2. Ontvang uw code per E-mail')) ?></span>
+                    <span><?= $escaper->escapeHtml(__('3. Activeer, Download en Speel!')) ?></span>
+                </a>
+            </div>
+        </div>
+    </div>
+	
+	<div class=" grid grid-cols-6 bg-white relative p-4 sticky top-0 z-50 col-span-6">
+        <div class="flex justify-between">
+            <div class="container px-0 mx-auto flex justify-between header-container gap-x-4">
+                <div class="flex items-center gap-x-2 items-end lg:hidden col-span-1">
+                    <div class="w-fit logo-header-wrapper flex items-center lg:!mr-3">
+                        <?= $block->getChildHtml('topmenu.mobile') ?>
+                    </div>
+                    
+                </div>
+                
+                <div class="flex flex-col md:flex-row items-center -mr-[39px] md:mr-0 col-span-1">
+                     <!--Logo-->
+                <div class="logo-header w-28 lg:w-40 -mr-[50px] sm:mr-0 flex items-center -mr-[8px] md:mr-0">
+                        <?= $block->getChildHtml('logo'); ?>
+                </div>
+
+                <!-- Trustpilot -->
+                <div class="trustpilot-header sm:flex items-center w-36 sm:w-[200px] col-span-1">
+                    <?= $this->getLayout()
+                        ->createBlock(CmsBlock::class)
+                        ->setBlockId('trustpilot_header')
+                        ->toHtml();?>
+                </div>
+                </div>
+               
+                   
+                <!--Search desktop-->
+                <div x-ref="searchContainerDesktop" class="hidden lg:flex items-center w-full px-12">
+                </div>
+                <!--/*lg:w-[412px]*/ -->
+                <div class="flex">
+                    <!-- Contact header block -->
+                    <div class="contact-header flex items-center hidden md:flex text-sm font-play">
+                        <?= $this->getLayout()
+                            ->createBlock(CmsBlock::class)
+                            ->setBlockId('contact_header')
+                            ->toHtml();?>
+                    </div>
+
+                    <div class="flex gap-2 sm:gap-4 items-center cart-header">
+
+                        <div class="hidden">
+                            <?= $block->getChildHtml('store-language-switcher'); ?>
+                        </div>
+
+                        <!--Compare Icon-->
+                        <a id="compare-link"
+                        x-cloak
+                        x-show="itemCount > 0"
+                        class="relative inline-block no-underline outline-none
+                                hover:text-black focus:ring-blue-700 focus:ring-1"
+                        href="<?= $escaper->escapeUrl($block->getUrl('catalog/product_compare/index')) ?>"
+                        title="<?= $escaper->escapeHtml(__('Compare Products')) ?>"
+                        x-data="initCompareHeader()"
+                        @private-content-loaded.window="receiveCompareData($event.detail.data)"
+                        >
+                            <?= $heroicons->scaleHtml('text-slate-800 hover:text-black') ?>
+
+                            <span class="sr-only label">
+                                <?= $escaper->escapeHtml(__('Compare Products')) ?>
+                            </span>
+
+                            <span class="absolute top-0 right-0 px-3 py-1 -mt-5 -mr-4 text-xs font-semibold
+                                leading-none text-center text-gray-700 uppercase transform
+                                translate-y-1/2 rounded-full bg-green-200"
+                            >
+                                <span x-text="itemCount"></span>
+                                <span x-show="itemCount === 1" class="sr-only">
+                                    <?= $escaper->escapeHtml(__('item')) ?>
+                                </span>
+                                <span x-show="itemCount > 1" class="sr-only">
+                                    <?= $escaper->escapeHtml(__('items')) ?>
+                                </span>
+                            </span>
+                        </a>
+
+                        <!--Customer Icon & Dropdown-->
+                        <?= $block->getChildHtml('customer') ?>
+
+                        <!--Cart Icon-->
+                        <a id="menu-cart-icon"
+                        <?php if ($showMiniCart): ?>@click.prevent.stop="$dispatch('toggle-cart',{});"<?php endif ?>
+                        class="relative outline-none focus:ring-blue-700 focus:ring-1 flex gap-x-2 items-center"
+                        href="<?= $escaper->escapeUrl($block->getUrl('checkout/cart/index')) ?>"
+                        >
+                        <span class="sr-only label">
+                            <?= $escaper->escapeHtml(__('Cart')) ?>
+                        </span>
+
+                        <?= $heroicons->shoppingCartHtml('h-8 w-8 sm:h-10 sm:w-10 text-slate-800 text-[#00a6e8]') ?>
+
+                            <span x-text="cart.summary_count"
+                                class="absolute top-0 right-0 hidden px-3 py-1 -mt-5 -mr-4 text-xs font-semibold
+                                leading-none text-center text-gray-700 uppercase transform
+                                translate-y-1/2 rounded-full bg-[#4DB5F2]"
+                                :class="{
+                                'hidden': !cart.summary_count,
+                                'block': cart.summary_count }"
+                            ></span>
+                            <div x-data="{
+                                customerData: {
+                                    cart: false,
+                                    receiveCustomerData(data) {
+                                        if (data.cart) {
+                                        this.cart = data.cart;
+                                        }
+                                    }
+                                }
+                            }" x-init="
+                                window.addEventListener('private-content-loaded', function(event) {
+                                    customerData.receiveCustomerData(event.detail.data);
+                                    
+                                });">
+                                <div class="hidden xl:flex flex-col font-play text-sm hover-div">
+                                    <span class="text-[#7c7c8d]">Winkelwagen</span>
+                                    <span class="flex items-center font-semibold subtotal-minicart" x-text="'€' + ' ' + (Math.round(customerData.cart.subtotalAmount * 100) / 100).toFixed(2)"></span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                   
+            </div>
+			
+        
+        </div>
+    </div>
+
+    <div class="bg-gradient relative shadow-xl">
+        <div class="container px-0">
+            <?= $block->getChildHtml('topmenu.desktop') ?>
+        </div>
+    </div>
+
+    <!--Search mobile-->
+    <div x-ref="searchContainerMobile" class="lg:hidden bg-slate-200">
+        <div x-ref="searchForm" class="container py-4 lg:px-3">
+            <?= $block->getChildHtml('header-search'); ?>
+        </div>
+    </div>
+
+    <div class="bg-[#F1F5F9] px-4 py-2 text-center text-[#64748B] text-sm">
+        <ul class="container flex justify-center gap-11 lg:justify-between">
+            <li class="hidden lg:flex items-center gap-3">
+                <?= $heroicons->checkHtml('text-green-500') ?>
+                <span><?= $escaper->escapeHtml(__('Direct verzonden')) ?></span>
+            </li>
+            <li class="hidden lg:flex items-center gap-3">
+                <?= $heroicons->checkHtml('text-green-500') ?>
+                <span><?= $escaper->escapeHtml(__('100% Offciele Digitale Licenties')) ?></span>
+            </li>
+            <li class="hidden lg:flex items-center gap-3">
+                <?= $heroicons->checkHtml('text-green-500') ?>
+                <span><?= $escaper->escapeHtml(__('Direct downloaden en Spelen')) ?></span>
+            </li>
+            <li class="flex items-center gap-3">
+                <?= $heroicons->checkHtml('text-green-500') ?>
+                <span><?= $escaper->escapeHtml(__('Refer a friend and get a discount')) ?></span>
+            </li>
+        </ul>
+    </div>
+
+    <!--Cart Drawer-->
+    <?= $block->getChildHtml('cart-drawer'); ?>
+
+    <!--Authentication Pop-Up-->
+    <?= $block->getChildHtml('authentication-popup'); ?>
+</div>
+<style>
+    .logo-header-wrapper {
+        margin-right: unset;
+        margin-left: unset;
+    }
+    .marquee {
+        animation: marquee_20s_linear_infinite 20s linear infinite;
+    }
+    @keyframes marquee_20s_linear_infinite {
+        0% {
+            transform: translate3d(110%, 0, 0);
+        }
+
+        100% {
+            transform: translate3d(-100%, 0, 0);
+        }
+    }
+    .bg-gradient {
+        background: linear-gradient(to bottom, #0095e0 0%, #059ee5 24%, #11b1f1 68%, #20b7ee 97%, #12a0d4 100%);
+    }
+</style>
