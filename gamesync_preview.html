@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameSync Theme Preview</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;600;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gsblack: '#0a0a0c',
+                        gspanel: '#151518',
+                        gshover: '#1e1e24',
+                        gsaccent: '#8b5cf6', // Vibrant purple
+                        gsaccent2: '#06b6d4', // Cyan
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0a0a0c;
+            color: #f8fafc;
+        }
+        .glass {
+            background: rgba(21, 21, 24, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #8b5cf6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hover-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px -10px rgba(139, 92, 246, 0.3);
+        }
+        .btn-gradient {
+            background: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%);
+            transition: all 0.3s ease;
+        }
+        .btn-gradient:hover {
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.6);
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- Navigation -->
+    <header class="fixed top-0 w-full z-50 glass">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer">
+                    <span class="font-display font-black text-2xl tracking-wider uppercase">Game<span class="gradient-text">Sync</span></span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#" class="text-gray-300 hover:text-white transition font-medium">Store</a>
+                    <a href="#" class="text-gray-300 hover:text-white transition font-medium">Library</a>
+                    <a href="#" class="text-gray-300 hover:text-white transition font-medium">Community</a>
+                    <a href="#" class="text-gray-300 hover:text-white transition font-medium">Support</a>
+                </nav>
+
+                <!-- Search & Cart -->
+                <div class="flex items-center space-x-6">
+                    <div class="hidden sm:block relative">
+                        <input type="text" placeholder="Search games..." class="bg-gshover text-sm rounded-full pl-4 pr-10 py-2 focus:outline-none focus:ring-2 focus:ring-gsaccent transition w-64 text-gray-200 placeholder-gray-500">
+                        <svg class="w-4 h-4 absolute right-3 top-2.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                    <button class="relative text-gray-300 hover:text-white transition">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        <span class="absolute -top-1 -right-2 bg-gsaccent text-xs rounded-full h-4 w-4 flex items-center justify-center font-bold">3</span>
+                    </button>
+                    <button class="bg-gshover p-2 rounded-full hidden md:block hover:bg-gray-700 transition">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow pt-20">
+        
+        <!-- Hero Section -->
+        <section class="relative h-[600px] w-full flex items-center">
+            <!-- Background setup (simulated gradient fallback for no image) -->
+            <div class="absolute inset-0 z-0 bg-gradient-to-br from-gspanel to-gsblack">
+                <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80')] opacity-30 bg-cover bg-center"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-gsblack via-transparent to-transparent"></div>
+            </div>
+            
+            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div class="max-w-xl">
+                    <span class="bg-gsaccent text-white text-xs font-bold px-2 py-1 rounded tracking-wider uppercase mb-4 inline-block">New Release</span>
+                    <h1 class="text-5xl md:text-7xl font-display font-black leading-tight mb-4">Cyber<br><span class="gradient-text">Odyssey</span> 2077</h1>
+                    <p class="text-xl text-gray-300 mb-8 leading-relaxed">Experience the ultimate next-gen RPG. Upgrade your cyberware, explore the neon-lit depths of the megalopolis, and forge your legend.</p>
+                    <div class="flex space-x-4">
+                        <button class="btn-gradient px-8 py-4 rounded-xl font-bold flex items-center transition">
+                            Buy Now - $59.99
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </button>
+                        <button class="px-8 py-4 rounded-xl font-bold border border-gray-600 hover:bg-gray-800 hover:border-gray-400 transition bg-gspanel/50 backdrop-blur-md">
+                            Add to Wishlist
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trending Section -->
+        <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-end mb-8">
+                <div>
+                    <h2 class="text-3xl font-display font-bold">Trending Keys</h2>
+                    <p class="text-gray-400 mt-2">The hottest digital codes right now</p>
+                </div>
+                <a href="#" class="text-gsaccent2 hover:text-white transition font-medium hidden sm:block">View All Releases &rarr;</a>
+            </div>
+
+            <!-- Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-gspanel rounded-2xl overflow-hidden hover-card transition duration-300 border border-gray-800 cursor-pointer group">
+                    <div class="h-48 bg-gray-800 relative">
+                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Game 1" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute top-3 right-3 bg-gsblack/80 backdrop-blur text-xs font-bold px-2 py-1 rounded text-green-400">-15%</div>
+                    </div>
+                    <div class="p-5">
+                        <p class="text-xs text-gray-400 font-medium tracking-wider mb-1">RPG / ACTION</p>
+                        <h3 class="font-bold text-lg mb-4 text-white">Elden Quest</h3>
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center space-x-2">
+                                <span class="bg-gray-800 px-2 py-1 rounded text-xs font-bold text-gray-300 line-through">$59.99</span>
+                                <span class="font-display font-bold text-xl text-white">$49.99</span>
+                            </div>
+                            <button class="bg-gshover p-2 rounded-lg hover:bg-gsaccent transition text-white">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-gspanel rounded-2xl overflow-hidden hover-card transition duration-300 border border-gray-800 cursor-pointer group">
+                    <div class="h-48 bg-gray-800 relative">
+                        <img src="https://images.unsplash.com/photo-1542751110-97427bbecf20?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Game 2" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-5">
+                        <p class="text-xs text-gray-400 font-medium tracking-wider mb-1">FPS / MULTIPLAYER</p>
+                        <h3 class="font-bold text-lg mb-4 text-white">Apex Warfare</h3>
+                        <div class="flex justify-between items-center">
+                            <span class="font-display font-bold text-xl text-white">Free to Play</span>
+                            <button class="bg-gshover p-2 rounded-lg hover:bg-gsaccent transition text-white">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-gspanel rounded-2xl overflow-hidden hover-card transition duration-300 border border-gray-800 cursor-pointer group">
+                    <div class="h-48 bg-gray-800 relative">
+                        <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Game 3" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-5">
+                        <p class="text-xs text-gray-400 font-medium tracking-wider mb-1">STRATEGY</p>
+                        <h3 class="font-bold text-lg mb-4 text-white">Galactic Empire IV</h3>
+                        <div class="flex justify-between items-center">
+                            <span class="font-display font-bold text-xl text-white">$29.99</span>
+                            <button class="bg-gshover p-2 rounded-lg hover:bg-gsaccent transition text-white">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-gspanel rounded-2xl overflow-hidden hover-card transition duration-300 border border-gray-800 cursor-pointer group">
+                    <div class="h-48 bg-gray-800 relative">
+                        <img src="https://images.unsplash.com/photo-1605901309584-818e25960b8f?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Game 4" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute top-3 right-3 bg-gsblack/80 backdrop-blur text-xs font-bold px-2 py-1 rounded text-gsaccent2">Early Access</div>
+                    </div>
+                    <div class="p-5">
+                        <p class="text-xs text-gray-400 font-medium tracking-wider mb-1">SURVIVAL</p>
+                        <h3 class="font-bold text-lg mb-4 text-white">Neon Drift</h3>
+                        <div class="flex justify-between items-center">
+                            <span class="font-display font-bold text-xl text-white">$19.99</span>
+                            <button class="bg-gshover p-2 rounded-lg hover:bg-gsaccent transition text-white">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gspanel mt-12 border-t border-gray-800 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-1">
+                    <span class="font-display font-black text-2xl tracking-wider uppercase mb-6 block">Game<span class="gradient-text">Sync</span></span>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Your ultimate digital warehouse for instantaneous game key fulfillment, gift cards, and software.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-6 tracking-wider text-sm uppercase">Store</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-gsaccent transition">PC Games</a></li>
+                        <li><a href="#" class="hover:text-gsaccent transition">Gift Cards</a></li>
+                        <li><a href="#" class="hover:text-gsaccent transition">Software</a></li>
+                        <li><a href="#" class="hover:text-gsaccent transition">Deals</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-6 tracking-wider text-sm uppercase">Support</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-gsaccent transition">Help Center</a></li>
+                        <li><a href="#" class="hover:text-gsaccent transition">Key Fulfillment</a></li>
+                        <li><a href="#" class="hover:text-gsaccent transition">Refund Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-6 tracking-wider text-sm uppercase">Newsletter</h4>
+                    <p class="text-gray-400 text-sm mb-4">Get the latest drops and discounts.</p>
+                    <div class="flex">
+                        <input type="email" placeholder="Email address" class="bg-gsblack border border-gray-700 text-white px-4 py-2 rounded-l-lg w-full focus:outline-none focus:border-gsaccent">
+                        <button class="bg-gsaccent hover:bg-purple-600 px-4 py-2 rounded-r-lg font-bold transition text-white">→</button>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-gray-800 text-center text-gray-500 text-xs">
+                <p>&copy; 2026 DigitalWarehouse & GameSync. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
